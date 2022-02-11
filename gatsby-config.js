@@ -1,3 +1,7 @@
+require("dotenv").config({
+	  path: `.env`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -16,6 +20,15 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+		  resolve: "gatsby-source-strapi",
+		  options: {
+			apiURL: process.env.API_URL || "http://localhost:1337",
+			contentTypes: ["article", "category", "writer"],
+			singleTypes: [`homepage`, `global`],
+			queryLimit: 1000,
+		  },
+		},
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
